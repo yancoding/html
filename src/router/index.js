@@ -3,13 +3,13 @@ import Vue from 'vue'
 
 Vue.use(VueRouter)
 
-import Home from '../components/Home'
+import chat from '../pages/chat'
 
 
 const routes = [
   {
-    path: '/home',
-    component: Home,
+    path: '/chat',
+    component: chat,
   },
 ]
 
