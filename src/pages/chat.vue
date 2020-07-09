@@ -26,6 +26,17 @@ export default {
       ]
     }
   },
+  created() {
+    this.$http.get('http://yancoding.oicp.io/api/', {
+      withCredentials: false,
+    })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
 }
 </script>
 <style lang="scss">

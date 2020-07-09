@@ -6,7 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueNativeWebsocket from 'vue-native-websocket'
 import VueMoment from 'vue-moment'
-import Axios form 'axios'
+import Axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
