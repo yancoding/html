@@ -20,7 +20,7 @@
         <el-aside width="150px">
           <el-menu default-active="/chat" :router="true">
             <el-menu-item index="/chat">chat</el-menu-item>
-            <el-menu-item index="/">系统</el-menu-item>
+            <el-menu-item index="/disk">移动硬盘</el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>
