@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import chat from '../pages/chat'
 import disk from '../components/disk/index'
+import togetherWatch from '../components/together/watch'
 
 
 const routes = [
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/disk',
     component: disk,
+  },
+  {
+    path: '/together/watch',
+    component: togetherWatch,
   },
 ]
 

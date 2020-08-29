@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getPathContent(dir) {
-      this.$http.post('http://localhost:8081/disk/dir', {
+      this.$http.post('http://localhost:8088/disk/dir', {
         dir,
       })
         .then(res => {
