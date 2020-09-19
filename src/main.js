@@ -24,7 +24,7 @@ import http from './axios'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-Vue.use(VueNativeWebsocket, 'ws://localhost:3000', {
+Vue.use(VueNativeWebsocket, `${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`, {
   store,
   format: 'json',
   reconnection: true,

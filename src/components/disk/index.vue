@@ -32,7 +32,7 @@ export default {
   methods: {
     getPathContent(dir) {
       this.loading = true
-      this.$http.post('http://localhost:8081/disk/dir', {
+      this.$http.post('/disk/dir', {
         dir,
       })
         .then(res => {
