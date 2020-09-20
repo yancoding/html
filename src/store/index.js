@@ -8,10 +8,15 @@ import mutations from './mutations'
 
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  state: {},
+  state: {
+    socket: {
+      isConnected: false,
+      message: '',
+      reconnectError: false,
+    },
+  },
   actions,
   mutations,
 })
 
 export default store
-
