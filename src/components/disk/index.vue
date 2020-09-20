@@ -1,11 +1,15 @@
 <template>
   <div v-loading="loading">
     <el-breadcrumb separator="/">
-        <el-breadcrumb-item v-for="item of currentPath.split('/')" :key="item">{{item}}</el-breadcrumb-item>
+        <el-breadcrumb-item
+          v-for="(item, index) of separatePath"
+          :key="index">
+          <a @click="getPathContent(item.path)">{{item.name}}</a>
+        </el-breadcrumb-item>
     </el-breadcrumb>
     <template v-for="item of pathContent">
       <div :key="item.path" style="display: inline-block;">
-        <el-button type="text"  v-if="item.type === 'dir'" @click="getPathContent(item.path)">{{item.path}}</el-button>
+        <el-button type="text"  v-if="item.type === 'dir'" @click="getPathContent(item.path)">{{item.name}}</el-button>
         <div v-else-if="item.type === 'file'" style="display: inline-block;">
           <el-image
             v-if="item.mime.indexOf('image') !== -1"
@@ -28,6 +32,24 @@ export default {
       currentPath: '.',
       loading: false,
     }
+  },
+  computed: {
+    separatePath() {
+      let separatePath = [{
+          name: '根目录',
+          path: '.'
+        }]
+      if (this.currentPath != '.') {
+        const list = this.currentPath.split('/')
+        for (let i = 0; i < list.length; i++) {
+          separatePath.push({
+            name: list[i],
+            path: list.slice(0, i+1).join('/'),
+          })
+        }
+      }
+      return separatePath
+    },
   },
   methods: {
     getPathContent(dir) {
