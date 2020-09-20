@@ -52,8 +52,7 @@ export default {
   },
   methods: {
     send() {
-      // 参数必须为json
-      this.$socket.send(JSON.stringify(this.text))
+      this.$socket.send(this.text)
       this.data2.push({
         date: Date.now(),
         content: this.text,
