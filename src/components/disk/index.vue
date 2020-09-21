@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading">
+  <div class="disk-container">
     <el-breadcrumb separator="/">
         <el-breadcrumb-item
           v-for="(item, index) of separatePath"
@@ -7,7 +7,7 @@
           <a @click="getPathContent(item.path)">{{item.name}}</a>
         </el-breadcrumb-item>
     </el-breadcrumb>
-    <template v-for="item of pathContent">
+    <!-- <template v-for="item of pathContent">
       <div :key="item.path" style="display: inline-block;">
         <el-button type="text"  v-if="item.type === 'dir'" @click="getPathContent(item.path)">{{item.name}}</el-button>
         <div v-else-if="item.type === 'file'" style="display: inline-block;">
@@ -20,38 +20,72 @@
           <video v-else-if="item.mime.indexOf('video') !== -1" :src="item.url" controls></video>
         </div>
       </div>
-    </template>
-    
+    </template> -->
+    <el-table
+      :data="pathContent"
+      :border="true"
+      v-loading="loading"
+      size="small"
+      style="width: 100%;">
+      <el-table-column
+        label="文件名"
+        :show-overflow-tooltip="true">
+        <template slot-scope="scope">
+          <el-link
+            :underline="false"
+            v-if="scope.row.type=='dir'"
+            @click="getPathContent(scope.row.path)">{{scope.row.name}}</el-link>
+          <span v-else>{{scope.row.name}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="mime"
+        label="类型"
+        width="120px"></el-table-column>
+      <el-table-column
+        prop="url"
+        label="路径"
+        :show-overflow-tooltip="true"></el-table-column>
+      <div slot="empty">
+        <div v-if="isError">
+          加载失败
+          <el-link @click="getPathContent(currentPath)">重试</el-link>
+        </div>
+        <div v-else>该目录为空</div>
+      </div>
+    </el-table>
   </div>
 </template>
 <script>
+import {
+  mapState,
+  mapGetters,
+  mapMutations,
+} from 'vuex'
+import {
+  UPDATE_CURRENT_PATH,
+} from '../../store/mutation-types'
+
 export default {
   data() {
     return {
       pathContent: [],
-      currentPath: '.',
       loading: false,
+      isError: false,
     }
   },
   computed: {
-    separatePath() {
-      let separatePath = [{
-          name: '根目录',
-          path: '.'
-        }]
-      if (this.currentPath != '.') {
-        const list = this.currentPath.split('/')
-        for (let i = 0; i < list.length; i++) {
-          separatePath.push({
-            name: list[i],
-            path: list.slice(0, i+1).join('/'),
-          })
-        }
-      }
-      return separatePath
-    },
+    ...mapState([
+      'currentPath',
+    ]),
+    ...mapGetters([
+      'separatePath',
+    ]),
   },
   methods: {
+    ...mapMutations({
+      updateCurrentPath: UPDATE_CURRENT_PATH,
+    }),
     getPathContent(dir) {
       this.loading = true
       this.$http.post('/disk/dir', {
@@ -60,10 +94,15 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.pathContent = res.data.data
-            this.currentPath = dir
+            this.updateCurrentPath({
+              path: dir,
+            })
+            this.isError = false
           }
         })
-        .catch(err => console.log(err))
+        .catch(() => {
+          this.isError = true
+        })
         .finally(() => this.loading = false)
     },
   },
@@ -73,8 +112,17 @@ export default {
 }
 </script>
 <style lang="scss">
-  img,
-  video {
-    width: 300px;
+  // img,
+  // video {
+  //   width: 300px;
+  // }
+  .disk-container {
+    .el-breadcrumb {
+      margin: 10px 0;
+    }
+
+    .el-table {
+      margin: 10px 0;
+    }
   }
 </style>

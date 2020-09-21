@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 import actions from './actions'
 import mutations from './mutations'
+import disk from './modules/disk'
 
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
   },
   actions,
   mutations,
+  modules: {
+    disk,
+  }
 })
 
 export default store
