@@ -47,7 +47,7 @@
         label="路径"
         :show-overflow-tooltip="true"></el-table-column>
       <div slot="empty">
-        <div v-if="isError">
+        <div v-if="error">
           加载失败
           <el-link @click="getPathContent(currentPath)">重试</el-link>
         </div>
@@ -59,52 +59,45 @@
 <script>
 import {
   mapState,
-  mapGetters,
-  mapMutations,
+  mapActions,
 } from 'vuex'
-import {
-  UPDATE_CURRENT_PATH,
-} from '../../store/mutation-types'
 
 export default {
   data() {
-    return {
-      pathContent: [],
-      loading: false,
-      isError: false,
-    }
+    return {}
   },
   computed: {
-    ...mapState([
-      'currentPath',
-    ]),
-    ...mapGetters([
-      'separatePath',
-    ]),
+    ...mapState({
+      currentPath: state => state.disk.currentPath,
+      pathContent: state => state.disk.pathContent,
+      loading: state => state.disk.loading,
+      error: state => state.disk.error,
+      separatePath: state => {
+        const currentPath = state.disk.currentPath
+        let separatePath = [{
+          name: '根目录',
+          path: '.'
+        }]
+        if (currentPath != '.') {
+          const list = currentPath.split('/')
+          for (let i = 0; i < list.length; i++) {
+            separatePath.push({
+              name: list[i],
+              path: list.slice(0, i+1).join('/'),
+            })
+          }
+        }
+        return separatePath
+      }
+    }),
   },
   methods: {
-    ...mapMutations({
-      updateCurrentPath: UPDATE_CURRENT_PATH,
+    // ...mapActions([
+    //   'getPathContent',
+    // ]),
+    ...mapActions({
+      getPathContent: 'getPathContent'
     }),
-    getPathContent(dir) {
-      this.loading = true
-      this.$http.post('/disk/dir', {
-        dir,
-      })
-        .then(res => {
-          if (res.data.success) {
-            this.pathContent = res.data.data
-            this.updateCurrentPath({
-              path: dir,
-            })
-            this.isError = false
-          }
-        })
-        .catch(() => {
-          this.isError = true
-        })
-        .finally(() => this.loading = false)
-    },
   },
   mounted() {
     this.getPathContent('.')

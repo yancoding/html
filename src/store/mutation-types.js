@@ -6,7 +6,10 @@ const SOCKET_RECONNECT = 'Websocket reconnected'
 const SOCKET_RECONNECT_ERROR = 'Websocket is having issues reconnecting..'
 
 // disk
-const UPDATE_CURRENT_PATH = "update current path!"
+const UPDATE_CURRENT_PATH = 'update current path!'
+const UPDATE_PATH_CONTENT = 'update path content'
+const UPDATE_LOADING_STATUS = 'update loading status'
+const UPDATE_ERROR_STATUS = 'update error status'
  
 export {
   SOCKET_ONOPEN,
@@ -17,4 +20,7 @@ export {
   SOCKET_RECONNECT_ERROR,
   // disk
   UPDATE_CURRENT_PATH,
+  UPDATE_PATH_CONTENT,
+  UPDATE_LOADING_STATUS,
+  UPDATE_ERROR_STATUS,
 }
