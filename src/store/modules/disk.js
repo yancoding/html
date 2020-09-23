@@ -13,7 +13,24 @@ const state = () => ({
   error: false,
 })
 
-const getters = {}
+const getters = {
+  separatePath({ currentPath }) {
+    let separatePath = [{
+      name: '根目录',
+      path: '.'
+    }]
+    if (currentPath != '.') {
+      const list = currentPath.split('/')
+      for (let i = 0; i < list.length; i++) {
+        separatePath.push({
+          name: list[i],
+          path: list.slice(0, i+1).join('/'),
+        })
+      }
+    }
+    return separatePath
+  }, 
+}
 
 const mutations = {
   [UPDATE_CURRENT_PATH](state, path) {

@@ -7,20 +7,6 @@
           <a @click="getPathContent(item.path)">{{item.name}}</a>
         </el-breadcrumb-item>
     </el-breadcrumb>
-    <!-- <template v-for="item of pathContent">
-      <div :key="item.path" style="display: inline-block;">
-        <el-button type="text"  v-if="item.type === 'dir'" @click="getPathContent(item.path)">{{item.name}}</el-button>
-        <div v-else-if="item.type === 'file'" style="display: inline-block;">
-          <el-image
-            v-if="item.mime.indexOf('image') !== -1"
-            :src="item.url" fit="contain"
-            :preview-src-list="[item.url]"
-            style="width: 200px; height: 200px;"></el-image>
-          <audio v-else-if="item.mime.indexOf('audio') !== -1" :src="item.url" controls></audio>
-          <video v-else-if="item.mime.indexOf('video') !== -1" :src="item.url" controls></video>
-        </div>
-      </div>
-    </template> -->
     <el-table
       :data="pathContent"
       :border="true"
@@ -59,6 +45,7 @@
 <script>
 import {
   mapState,
+  mapGetters,
   mapActions,
 } from 'vuex'
 
@@ -72,43 +59,24 @@ export default {
       pathContent: state => state.disk.pathContent,
       loading: state => state.disk.loading,
       error: state => state.disk.error,
-      separatePath: state => {
-        const currentPath = state.disk.currentPath
-        let separatePath = [{
-          name: '根目录',
-          path: '.'
-        }]
-        if (currentPath != '.') {
-          const list = currentPath.split('/')
-          for (let i = 0; i < list.length; i++) {
-            separatePath.push({
-              name: list[i],
-              path: list.slice(0, i+1).join('/'),
-            })
-          }
-        }
-        return separatePath
-      }
     }),
+    ...mapGetters([
+      'separatePath',
+    ]),
   },
   methods: {
-    // ...mapActions([
-    //   'getPathContent',
-    // ]),
-    ...mapActions({
-      getPathContent: 'getPathContent'
-    }),
+    ...mapActions([
+      'getPathContent',
+    ]),
   },
   mounted() {
-    this.getPathContent('.')
+    if (this.currentPath == '.') {
+      this.getPathContent('.')
+    }
   },
 }
 </script>
 <style lang="scss">
-  // img,
-  // video {
-  //   width: 300px;
-  // }
   .disk-container {
     .el-breadcrumb {
       margin: 10px 0;
