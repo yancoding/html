@@ -21,8 +21,12 @@
           <el-link
             :underline="false"
             v-if="scope.row.type=='dir'"
-            @click="getPathContent(scope.row.path)">{{scope.row.name}}</el-link>
-          <span v-else>{{scope.row.name}}</span>
+            @click="getPathContent(scope.row.path)">
+              <i class="el-icon-folder"></i> {{scope.row.name}}
+            </el-link>
+          <span v-else>
+            <i class="el-icon-document"></i> {{scope.row.name}}
+          </span>
         </template>
       </el-table-column>
       <el-table-column
