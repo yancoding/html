@@ -1,9 +1,4 @@
-import {
-  UPDATE_CURRENT_PATH,
-  UPDATE_PATH_CONTENT,
-  UPDATE_LOADING_STATUS,
-  UPDATE_ERROR_STATUS,
-} from '../mutation-types'
+import * as types from '../mutation-types'
 import disk from '@/api/disk'
 import Vue from 'vue'
 const state = () => ({
@@ -33,16 +28,16 @@ const getters = {
 }
 
 const mutations = {
-  [UPDATE_CURRENT_PATH](state, path) {
+  [types.UPDATE_CURRENT_PATH](state, path) {
     state.currentPath = path
   },
-  [UPDATE_PATH_CONTENT](state, content) {
+  [types.UPDATE_PATH_CONTENT](state, content) {
     state.pathContent = content
   },
-  [UPDATE_LOADING_STATUS](state, status) {
+  [types.UPDATE_LOADING_STATUS](state, status) {
     state.loading = status
   },
-  [UPDATE_ERROR_STATUS](state, status) {
+  [types.UPDATE_ERROR_STATUS](state, status) {
     state.error = status
   }
 }
@@ -51,20 +46,21 @@ const actions = {
   getPathContent({
     commit,
   }, path) {
-    commit(UPDATE_LOADING_STATUS, true)
+    commit(types.UPDATE_LOADING_STATUS, true)
+    commit(types.UPDATE_PATH_CONTENT, [])
+    commit(types.UPDATE_CURRENT_PATH, path)
     disk.getPathContent(path)
       .then(res => {
         if (res.data.success) {
-          commit(UPDATE_PATH_CONTENT, res.data.data)
-          commit(UPDATE_ERROR_STATUS, false)
-          commit(UPDATE_CURRENT_PATH, path)
+          commit(types.UPDATE_PATH_CONTENT, res.data.data)
+          commit(types.UPDATE_ERROR_STATUS, false)
         }
       })
       .catch(err => {
-        commit(UPDATE_ERROR_STATUS, false)
+        commit(types.UPDATE_ERROR_STATUS, true)
         Vue.prototype.$message.error(`err: ${err}`)
       })
-      .finally(() => commit(UPDATE_LOADING_STATUS, false))
+      .finally(() => commit(types.UPDATE_LOADING_STATUS, false))
   },
 }
 

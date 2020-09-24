@@ -4,7 +4,8 @@
         <el-breadcrumb-item
           v-for="(item, index) of separatePath"
           :key="index">
-          <a @click="getPathContent(item.path)">{{item.name}}</a>
+          <a v-if="index !== separatePath.length - 1" @click="getPathContent(item.path)">{{item.name}}</a>
+          <span v-else>{{item.name}}</span>
         </el-breadcrumb-item>
     </el-breadcrumb>
     <el-table
@@ -29,15 +30,18 @@
         label="类型"
         width="120px"></el-table-column>
       <el-table-column
-        prop="url"
         label="路径"
-        :show-overflow-tooltip="true"></el-table-column>
+        :show-overflow-tooltip="true">
+        <template slot-scope="scope">
+          <a :href="scope.row.url" target="blank">{{scope.row.url}}</a>
+        </template>  
+      </el-table-column>
       <div slot="empty">
         <div v-if="error">
           加载失败
           <el-link @click="getPathContent(currentPath)">重试</el-link>
         </div>
-        <div v-else>该目录为空</div>
+        <div v-else-if="pathContent.length === 0 && !loading">该目录为空</div>
       </div>
     </el-table>
   </div>
