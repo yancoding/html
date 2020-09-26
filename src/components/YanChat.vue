@@ -2,16 +2,16 @@
   <div class="container">
     <div class="header">{{title}}</div>
     <div class="body" ref="body">
-      <div v-for="message in data2" :key="message.id">
+      <div v-for="(message, index) in messages" :key="index">
         <div class="date">{{new Date(message.date) | moment('YYYY/M/D hh:mm:ss')}}</div>
-        <div :class="['message', message.user.name === 'yan' ? 'mine' : '']">
+        <div :class="['message', message.user.id === userId ? 'mine' : '']">
           <el-image class="avator" fit="cover" :src="message.user.avatar"></el-image>
           <div class="content">{{message.content}}</div>
         </div> 
       </div>
     </div>
     <div class="input-box">
-      <textarea v-model="text" @keyup.enter="send"></textarea>
+      <textarea v-model="text" @keydown.enter.prevent @keyup.enter="send"></textarea>
       <el-button type="primary" size="mini" @click="send">发送</el-button>
     </div>
   </div>
@@ -22,12 +22,11 @@ import Vue from 'vue'
 export default {
   data() {
     return {
-      data2: [],
       text: '',
     }
   },
   props: {
-    data: {
+    messages: {
       type: Array,
       default() {
         return []
@@ -37,47 +36,30 @@ export default {
       type: String,
       default: '',
     },
+    userId: {
+      type: Number,
+      required: true,
+    },
   },
   watch: {
-    data2() {
+    messages() {
       Vue.nextTick()
         .then(() => {
           const body = this.$refs.body
           const scrollHeight = body.scrollHeight
           const offsetHeight = body.offsetHeight
-          
           body.scrollTo(0, scrollHeight - offsetHeight + 2)
         })
     },
   },
   methods: {
     send() {
-      this.$socket.send(this.text)
-      this.data2.push({
-        date: Date.now(),
-        content: this.text,
-        user: {
-          name: 'yan',
-          avatar: 'http://img5.imgtn.bdimg.com/it/u=1416536552,3950553019&fm=26&gp=0.jpg',
-        },
-      })
+      const content = this.text
+      if (content.trim()) {
+        this.$emit('send', content)
+      }
       this.text = ''
     },
-    sendObj() {
-      this.$socket.sendObj({
-        type: 'text',
-        data: 'haha',
-      })
-    },
-  },
-  created() {
-    this.$options.sockets.onmessage = message => {
-      console.log(message)
-      this.data2.push(JSON.parse(message.data))
-    }
-  },
-  beforeDestroy() {
-    delete this.$options.sockets.onmessage
   },
 }
 </script>

@@ -10,6 +10,9 @@ const UPDATE_CURRENT_PATH = 'update current path!'
 const UPDATE_PATH_CONTENT = 'update path content'
 const UPDATE_LOADING_STATUS = 'update loading status'
 const UPDATE_ERROR_STATUS = 'update error status'
+
+// chat
+const PUSH_MESSAGE = 'push new message to messages'
  
 export {
   SOCKET_ONOPEN,
@@ -23,4 +26,6 @@ export {
   UPDATE_PATH_CONTENT,
   UPDATE_LOADING_STATUS,
   UPDATE_ERROR_STATUS,
+  // chat
+  PUSH_MESSAGE,
 }
