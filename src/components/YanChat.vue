@@ -44,12 +44,7 @@ export default {
   watch: {
     messages() {
       Vue.nextTick()
-        .then(() => {
-          const body = this.$refs.body
-          const scrollHeight = body.scrollHeight
-          const offsetHeight = body.offsetHeight
-          body.scrollTo(0, scrollHeight - offsetHeight + 2)
-        })
+        .then(this.scrollToBottom)
     },
   },
   methods: {
@@ -60,6 +55,15 @@ export default {
       }
       this.text = ''
     },
+    scrollToBottom() {
+      const body = this.$refs.body
+      const scrollHeight = body.scrollHeight
+      const offsetHeight = body.offsetHeight
+      body.scrollTo(0, scrollHeight - offsetHeight + 2)
+    },
+  },
+  mounted() {
+    this.scrollToBottom()
   },
 }
 </script>
