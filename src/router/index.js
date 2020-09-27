@@ -6,9 +6,14 @@ Vue.use(VueRouter)
 import chat from '../pages/chat'
 import disk from '../components/disk/index'
 import togetherWatch from '../components/together/watch'
+import login from '../components/login'
 
 
 const routes = [
+  {
+    path: '/login',
+    component: login,
+  },
   {
     path: '/chat',
     component: chat,
@@ -27,5 +32,13 @@ const router = new VueRouter({
   routes,
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token') || ''
+  if(to.path === '/login' || token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
 
+export default router

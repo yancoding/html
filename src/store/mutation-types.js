@@ -13,6 +13,10 @@ const UPDATE_ERROR_STATUS = 'update error status'
 
 // chat
 const PUSH_MESSAGE = 'push new message to messages'
+
+// login
+const UPDATA_SALT = 'updata salt value'
+const COMPUTE_ROUNDS = 'compute rounds'
  
 export {
   SOCKET_ONOPEN,
@@ -28,4 +32,7 @@ export {
   UPDATE_ERROR_STATUS,
   // chat
   PUSH_MESSAGE,
+  // login
+  UPDATA_SALT,
+  COMPUTE_ROUNDS,
 }
