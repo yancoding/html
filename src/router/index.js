@@ -7,6 +7,7 @@ import chat from '../pages/chat'
 import disk from '../components/disk/index'
 import togetherWatch from '../components/together/watch'
 import login from '../components/login'
+import index from '../components/index'
 
 
 const routes = [
@@ -15,16 +16,22 @@ const routes = [
     component: login,
   },
   {
-    path: '/chat',
-    component: chat,
-  },
-  {
-    path: '/disk',
-    component: disk,
-  },
-  {
-    path: '/together/watch',
-    component: togetherWatch,
+    path: '/',
+    component: index,
+    children: [
+      {
+        path: '/chat',
+        component: chat,
+      },
+      {
+        path: '/disk',
+        component: disk,
+      },
+      {
+        path: '/together/watch',
+        component: togetherWatch,
+      },
+    ]
   },
 ]
 
