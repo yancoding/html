@@ -50,9 +50,9 @@ const actions = {
     commit(types.UPDATE_PATH_CONTENT, [])
     commit(types.UPDATE_CURRENT_PATH, path)
     disk.getPathContent(path)
-      .then(res => {
-        if (res.data.success) {
-          commit(types.UPDATE_PATH_CONTENT, res.data.data)
+      .then(data => {
+        if (data.success) {
+          commit(types.UPDATE_PATH_CONTENT, data.data)
           commit(types.UPDATE_ERROR_STATUS, false)
         }
       })

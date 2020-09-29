@@ -56,7 +56,8 @@
 </template>
 
 <script>
-import bcrypt from "bcryptjs"
+import bcrypt from 'bcryptjs'
+import user from '@/api/user'
 
 export default {
   data() {
@@ -113,28 +114,36 @@ export default {
         const token = '123'
         if (typeof localStorage !== 'undefined' && token) {
           localStorage.setItem('token', token)
-          this.$router.push("/");
+          this.$router.push("/")
         }
       }, 1000)
     },
     async register() {
       const { username, password } = this.registerForm
       const rounds = this.rounds
-      let hash = "";
+      let hash = ""
       try {
         const salt = await bcrypt.genSalt(rounds);
         hash = await bcrypt.hash(password, salt)
-      } catch (error) {
+      } catch (err) {
+        this.$message.error(err)
         return;
       }
-      setTimeout(() => {
-        console.log(username, hash)
-        const token = '123'
-        if (typeof localStorage !== 'undefined' && token) {
-          localStorage.setItem('token', token)
-          this.$router.push("/");
-        }
-      }, 1000)
+      user.register({
+        username,
+        password: hash,
+      })
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('token', data.data.token)
+            this.$router.push('/')
+          } else {
+            this.$message.error(data.msg)
+          }
+        })
+        .catch(err => {
+          this.$message.error(err)
+        })
     },
   },
   created() {},
