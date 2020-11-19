@@ -96,9 +96,15 @@ export default {
     },
     getSalt() {
       const username = this.loginForm.username
-      setTimeout(() => {
-        console.log(username)
-      }, 1000)
+      user.getSalt({ username })
+        .then(data => {
+          if (data.success) {
+            this.salt = data.data.salt
+          } else {
+            this.$message.error(data.msg)
+          }
+        })
+        .catch(err => this.$message.error(err))
     },
     async login() {
       const { username, password } = this.loginForm
@@ -109,14 +115,23 @@ export default {
       } catch (error) {
         return;
       }
-      setTimeout(() => {
-        console.log(username, hash)
-        const token = '123'
-        if (typeof localStorage !== 'undefined' && token) {
-          localStorage.setItem('token', token)
-          this.$router.push("/")
-        }
-      }, 1000)
+      user.login({
+        username,
+        password: hash,
+      })
+        .then(data => {
+          if (data.success) {
+            if (typeof localStorage !== 'undefined') {
+              localStorage.setItem('token', data.data.token)
+              this.$router.push("/")
+            }
+          } else {
+            this.$message.error(data.msg)
+          }
+        })
+        .catch(err => {
+          this.$message.error(err)
+        })
     },
     async register() {
       const { username, password } = this.registerForm
