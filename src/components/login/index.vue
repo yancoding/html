@@ -104,7 +104,7 @@ export default {
             this.$message.error(data.msg)
           }
         })
-        .catch(err => this.$message.error(err))
+        .catch(err => this.$message.error(`${err}`))
     },
     async login() {
       const { username, password } = this.loginForm
@@ -130,7 +130,7 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error(err)
+          this.$message.error(`${err}`)
         })
     },
     async register() {
@@ -141,7 +141,7 @@ export default {
         const salt = await bcrypt.genSalt(rounds);
         hash = await bcrypt.hash(password, salt)
       } catch (err) {
-        this.$message.error(err)
+        this.$message.error(`${err}`)
         return;
       }
       user.register({
@@ -157,7 +157,7 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error(err)
+          this.$message.error(`${err}`)
         })
     },
   },
