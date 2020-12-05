@@ -17,6 +17,7 @@ const PUSH_MESSAGE = 'push new message to messages'
 // login
 const UPDATA_SALT = 'updata salt value'
 const COMPUTE_ROUNDS = 'compute rounds'
+const  SIGN_OUT = 'sign out'
  
 export {
   SOCKET_ONOPEN,
@@ -35,4 +36,5 @@ export {
   // login
   UPDATA_SALT,
   COMPUTE_ROUNDS,
+  SIGN_OUT,
 }

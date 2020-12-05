@@ -171,6 +171,7 @@ export default {
 <style lang="scss">
 .login-container {
   align-items: center;
+  background: url(~@/assets/login-bg.jpg) center/cover no-repeat;
 
   .el-card {
     width: 350px;
