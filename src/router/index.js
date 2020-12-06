@@ -9,11 +9,30 @@ import togetherWatch from '../components/together/watch'
 import AppLogin from '../components/login/AppLogin'
 import index from '../components/index'
 
+// setting
+import AppSetting from '../components/AppSetting'
+import SettingProfile from '../components/settinng/SettingProfile'
+import SettingOther from '../components/settinng/SettingOther'
+
 
 const routes = [
   {
     path: '/login',
     component: AppLogin,
+  },
+  {
+    path: '/setting',
+    component: AppSetting,
+    children: [
+      {
+        path: 'profile',
+        component: SettingProfile,
+      },
+      {
+        path: 'other',
+        component: SettingOther,
+      },
+    ],
   },
   {
     path: '/',
