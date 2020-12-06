@@ -1,9 +1,10 @@
 <template>
   <div>
-    <audio 
+    <video 
       ref="videoPlayer" 
       class="video-js"
-      :class="playerClass"></audio>
+      :class="playerClass"
+    ></video>
   </div>
 </template>
 
