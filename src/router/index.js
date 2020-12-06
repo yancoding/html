@@ -6,14 +6,14 @@ Vue.use(VueRouter)
 import chat from '../pages/chat'
 import disk from '../components/disk/index'
 import togetherWatch from '../components/together/watch'
-import login from '../components/login'
+import AppLogin from '../components/login/AppLogin'
 import index from '../components/index'
 
 
 const routes = [
   {
     path: '/login',
-    component: login,
+    component: AppLogin,
   },
   {
     path: '/',
