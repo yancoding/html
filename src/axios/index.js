@@ -5,8 +5,15 @@ const instance = axios.create({
   baseURL: `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`,
   timeout: 1000,
   headers: {
-    Authorization: localStorage.getItem(AUTH_TOKEN),
+    // Authorization: localStorage.getItem(AUTH_TOKEN),
   },
+})
+
+instance.interceptors.request.use(config => {
+  config.headers.Authorization = localStorage.getItem(AUTH_TOKEN)
+  return config
+}, err => {
+  return Promise.reject(err)
 })
 
 instance.interceptors.response.use(res => {
