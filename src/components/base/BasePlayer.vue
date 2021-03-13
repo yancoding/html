@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="base-player">
     <video 
       ref="videoPlayer" 
       class="video-js"
@@ -77,7 +77,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.base-player {
+  display: inline-block;
+}
 .video-js .vjs-title-bar {
   background: rgba(0, 0, 0, 0.5);
   color: white;

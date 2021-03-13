@@ -1,36 +1,53 @@
 import Vue from 'vue'
-import {
-  SOCKET_ONOPEN,
-  SOCKET_ONCLOSE,
-  SOCKET_ONERROR,
-  SOCKET_ONMESSAGE,
-  SOCKET_RECONNECT,
-  SOCKET_RECONNECT_ERROR
-} from './mutation-types'
+import * as types from './mutation-types'
 
 const mutations = {
-  [SOCKET_ONOPEN](state, e) {
+  [types.SOCKET_ONOPEN](state, e) {
     console.log('socket open')
     Vue.prototype.$socket = e.currentTarget
     state.socket.isConnected = true
   },  
-  [SOCKET_ONCLOSE](state, e) {
+  [types.SOCKET_ONCLOSE](state, e) {
     console.log('socket close: ', e)
     state.socket.isConnected = false
   },  
-  [SOCKET_ONERROR](state,e) {
+  [types.SOCKET_ONERROR](state,e) {
     console.log('socket error: ', e)
   },  
-  [SOCKET_ONMESSAGE](state, message) {
+  [types.SOCKET_ONMESSAGE](state, message) {
     console.log('socket received message: ', message)
-    state.socket.message = message
+    switch(message.type) {
+      case 'online':
+        state.onlineUsers = [ ...message.content ]
+        break
+      case 'chat':
+        state.socket.message = message
+        break
+      case 'invite':
+        state.inviteDialog = {
+          visible: true,
+          content: message.video,
+        }
+        state.inviteInfo = message
+        break
+    }
+    // 
   },  
-  [SOCKET_RECONNECT](state, count) {
+  [types.SOCKET_RECONNECT](state, count) {
     console.info('socket reconnect', count)
   },
-  [SOCKET_RECONNECT_ERROR](state) {
+  [types.SOCKET_RECONNECT_ERROR](state) {
     console.log('socket reconnect error')
     state.socket.reconnectError = true
+  },
+  updateUser(state, user) {
+    state.user = user
+  },
+  updateInviteDialog(state, { visible, content }) {
+    state.inviteDialog = { ...state.inviteDialog, visible, content }
+  },
+  updateCurrentSource(state, source) {
+    state.currentSource = source
   },
 }
 

@@ -11,14 +11,21 @@ import chat from './modules/chat'
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
-    user: {
-      id: 1,
-      name: 'yan',
-    },
+    user: {},
     socket: {
       isConnected: false,
       message: '',
       reconnectError: false,
+    },
+    onlineUsers: [],
+    inviteDialog: {
+      visible: false,
+      content: '',
+    },
+    currentSource: {},
+    inviteInfo: {
+      from: {},
+      video: {},
     },
   },
   actions,
