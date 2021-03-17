@@ -11,6 +11,7 @@ import chat from './modules/chat'
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
+    token: '',
     user: {},
     socket: {
       isConnected: false,

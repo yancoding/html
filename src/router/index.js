@@ -14,6 +14,11 @@ import AppSetting from '../components/AppSetting'
 import SettingProfile from '../components/settinng/SettingProfile'
 import SettingOther from '../components/settinng/SettingOther'
 
+// upload
+import UploadPage from '../components/upload/UploadPage'
+
+// 文件管理
+import Manage from '../components/manage/Manage'
 
 const routes = [
   {
@@ -33,6 +38,14 @@ const routes = [
         component: SettingOther,
       },
     ],
+  },
+  {
+    path: '/upload',
+    component: UploadPage,
+  },
+  {
+    path: '/manage',
+    component: Manage,
   },
   {
     path: '/',

@@ -9,7 +9,6 @@
     <OnlineUserList
       @invite="handleInvite"
     />
-    <VideoUpload/>
     <VideoList
       @play="handlePlay"
     />
@@ -19,7 +18,6 @@
 <script>
 import BasePlayer from '../../base/BasePlayer'
 import VideoList from './VideoList'
-import VideoUpload from './VideoUpload'
 import OnlineUserList from './OnlineUserList'
 
 import { mapState } from 'vuex'
@@ -28,7 +26,6 @@ export default {
   components: {
     BasePlayer,
     VideoList,
-    VideoUpload,
     OnlineUserList,
   },
   data() {

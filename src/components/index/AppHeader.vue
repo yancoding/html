@@ -7,11 +7,24 @@
       ></el-input>
     </div>
     <div class="header-right">
-      <el-dropdown class="dropdown-avatar" trigger="click" @command="handleCommand">
-        <span>
-          <el-avatar src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1354268575,1268995723&fm=26&gp=0.jpg"></el-avatar>
-          <i class="el-icon-arrow-down"></i>
-        </span>
+      <el-link
+        class="right-item"
+        icon="el-icon-s-management"
+        :underline="false"
+        @click="$router.push('/manage')"
+      >管理</el-link>
+      <el-link
+        class="right-item"
+        icon="el-icon-upload"
+        :underline="false"
+        @click="$router.push('/upload')"
+      >上传</el-link>
+      <el-dropdown
+        class="right-item"
+        trigger="click"
+        @command="handleCommand"
+      >  
+        <el-avatar src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1354268575,1268995723&fm=26&gp=0.jpg"></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="setting">设置</el-dropdown-item>
           <el-dropdown-item command="signout">退出登录</el-dropdown-item>
@@ -68,6 +81,15 @@ export default {
 
   .header-right {
     float: right;
+    display: inline-table;
+
+    .right-item {
+      display: table-cell;
+
+      &+.right-item {
+        padding-left: 30px;
+      }
+    }
   }
 }
 </style>
