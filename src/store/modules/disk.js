@@ -11,7 +11,7 @@ const state = () => ({
 const getters = {
   separatePath({ currentPath }) {
     let separatePath = [{
-      name: '根目录',
+      name: '根目录', 
       path: '.'
     }]
     if (currentPath != '.') {
@@ -29,9 +29,21 @@ const getters = {
 
 const mutations = {
   [types.UPDATE_CURRENT_PATH](state, path) {
-    state.currentPath = path
+    state.currentPath = path || '.'
   },
   [types.UPDATE_PATH_CONTENT](state, content) {
+    content.map(item => {
+      let size = ''
+      if (item.size < 1024) {
+        size = `${item.size}B`
+      } else if (item.size < Math.pow(1024, 2)) {
+        size = `${Math.floor(item.size/1024)}KB`
+      } else if (item.size < Math.pow(1024, 3)) {
+        size = `${Math.floor(item.size/(1024 * 1024))}MB`
+      }
+      item.size = size
+      return item
+    })
     state.pathContent = content
   },
   [types.UPDATE_LOADING_STATUS](state, status) {

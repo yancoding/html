@@ -1,6 +1,8 @@
 <template>
   <el-container class="manage">
-    <el-header class="manage-header">文件管理</el-header>
+    <el-header class="manage-header">
+      <h2>文件管理</h2>
+    </el-header>
     <el-container class="manage-body">
       <ManageList/>
     </el-container>

@@ -12,7 +12,7 @@
         label="文件名"
         :show-overflow-tooltip="true"></el-table-column>
       <el-table-column
-        prop="mime"
+        prop="type"
         label="类型"
         width="120px"></el-table-column>
       <el-table-column

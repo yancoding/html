@@ -1,11 +1,11 @@
 <template>
   <div>
-    <BasePlayer
+    <VideoPlayer
       ref="player"
       :options="videoOptions"
       :player-class="playerClass"
       @ready="handlePlayerReady"
-    ></BasePlayer>
+    ></VideoPlayer>
     <OnlineUserList
       @invite="handleInvite"
     />
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import BasePlayer from '../../base/BasePlayer'
+import VideoPlayer from './VideoPlayer'
 import VideoList from './VideoList'
 import OnlineUserList from './OnlineUserList'
 
@@ -24,7 +24,7 @@ import { mapState } from 'vuex'
 
 export default {
   components: {
-    BasePlayer,
+    VideoPlayer,
     VideoList,
     OnlineUserList,
   },
@@ -48,6 +48,7 @@ export default {
       },
       file: {},
       syncDone: true,
+      text: 'haha',
     }
   },
   computed: {
@@ -140,6 +141,7 @@ export default {
         src,
         name,
       })
+      this.player.poster(file.thumbnail)
     },
     handleInvite(id) {
       this.$socket.sendObj({

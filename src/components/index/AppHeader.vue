@@ -1,11 +1,6 @@
 <template>
   <div class="app-header">
-    <div class="header-left">
-      <el-input
-        prefix-icon="el-icon-search"
-        v-model="searchKey"
-      ></el-input>
-    </div>
+    <div class="header-left"></div>
     <div class="header-right">
       <el-link
         class="right-item"

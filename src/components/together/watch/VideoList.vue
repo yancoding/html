@@ -1,19 +1,20 @@
 <template>
   <div class="video-list">
-    <ul>
-      <li v-for="file in videoList" :key="file.id">
-        {{file.name}}
-        <el-button
-          type="text"
-          @click="play(file)"
-        >播放</el-button>
-      </li>
-    </ul>
+    <VideoListCard
+      v-for="video in videoList"
+      :key="video.id"
+      :video="video"
+      @play="handlePlay"
+    />
   </div>
 </template>
 
 <script>
+import VideoListCard from './VideoListCard'
 export default {
+  components: {
+    VideoListCard,
+  },
   data() {
     return {
       videoList: [],
@@ -26,9 +27,8 @@ export default {
           this.videoList = data.data
         })
     },
-    play(file) {
-          console.log(file)
-      this.$emit('play', file)
+    handlePlay(video) {
+      this.$emit('play', video)
     },
   },
   created() {
@@ -38,5 +38,15 @@ export default {
 </script>
 
 <style lang="scss">
+.video-list {
+  width: 840px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .video-list-card {
+
+  }
+}
   
 </style>

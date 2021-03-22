@@ -4,7 +4,7 @@
         <el-breadcrumb-item
           v-for="(item, index) of separatePath"
           :key="index">
-          <a v-if="index !== separatePath.length - 1" @click="getPathContent(item.path)">{{item.name}}</a>
+          <a v-if="index !== separatePath.length - 1" @click="handleClickPath(item.path)">{{item.name}}</a>
           <span v-else>{{item.name}}</span>
         </el-breadcrumb-item>
     </el-breadcrumb>
@@ -21,7 +21,7 @@
           <el-link
             :underline="false"
             v-if="scope.row.type=='dir'"
-            @click="getPathContent(scope.row.path)">
+            @click="handleClickPath(scope.row.path)">
               <i class="el-icon-folder"></i> {{scope.row.name}}
             </el-link>
           <span v-else>
@@ -32,6 +32,10 @@
       <el-table-column
         prop="mime"
         label="类型"
+        width="120px"></el-table-column>
+      <el-table-column
+        prop="size"
+        label="文件大小"
         width="120px"></el-table-column>
       <el-table-column
         label="路径"
@@ -76,12 +80,18 @@ export default {
     ...mapActions([
       'getPathContent',
     ]),
-  },
-  mounted() {
-    if (this.currentPath == '.') {
-      this.getPathContent('.')
+    handleClickPath(path) {
+      this.$router.push({ query: { path: path === '.' ? '' : path } })
     }
   },
+  mounted() {
+    const { path } = this.$route.query
+    this.getPathContent(path)
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.getPathContent(to.query.path)
+    next()
+  }
 }
 </script>
 <style lang="scss">
