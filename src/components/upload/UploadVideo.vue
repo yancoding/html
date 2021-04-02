@@ -13,7 +13,7 @@
     >
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">只能上传video/*文件，且不超过500M</div>
+      <div class="el-upload__tip" slot="tip">只能上传video/*文件，且不超过1G</div>
     </el-upload>
   </div>
 </template>
@@ -22,7 +22,7 @@
 export default {
   data() {
     return {
-      uploadUrl: `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/upload`,
+      uploadUrl: `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/file/upload`,
       fileList: [],
       token: localStorage.getItem('token'),
     }

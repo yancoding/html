@@ -18,6 +18,9 @@ const PUSH_MESSAGE = 'push new message to messages'
 const UPDATA_SALT = 'updata salt value'
 const COMPUTE_ROUNDS = 'compute rounds'
 const  SIGN_OUT = 'sign out'
+
+// manage
+const UPDATE_MULTIPLE_SELECTION = '更新选择项'
  
 export {
   SOCKET_ONOPEN,
@@ -37,4 +40,6 @@ export {
   UPDATA_SALT,
   COMPUTE_ROUNDS,
   SIGN_OUT,
+  // manage
+  UPDATE_MULTIPLE_SELECTION,
 }

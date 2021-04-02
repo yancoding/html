@@ -22,15 +22,12 @@
 export default {
   data() {
     return {
-      uploadUrl: `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/upload`,
+      uploadUrl: `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/file/upload`,
       fileList: [],
       token: localStorage.getItem('token')
     }
   },
   methods: {
-    getVideoList() {
-      this.$http('upload', )
-    },
     // handleFileChange(e) {
     //   const file = e.target.files[0]
     //   const data = new FormData()

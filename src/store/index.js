@@ -7,6 +7,7 @@ import actions from './actions'
 import mutations from './mutations'
 import disk from './modules/disk'
 import chat from './modules/chat'
+import fileManage from './modules/file-manage'
 
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
@@ -34,6 +35,7 @@ const store = new Vuex.Store({
   modules: {
     disk,
     chat,
+    fileManage,
   }
 })
 

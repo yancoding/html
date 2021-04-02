@@ -6,6 +6,30 @@
         class="right-item"
         icon="el-icon-s-management"
         :underline="false"
+        @click="$router.push('/')"
+      >推荐</el-link>
+      <el-link
+        class="right-item"
+        icon="el-icon-s-management"
+        :underline="false"
+        @click="$router.push('/together/watch')"
+      >一起看</el-link>
+      <el-link
+        class="right-item"
+        icon="el-icon-s-management"
+        :underline="false"
+        @click="$router.push('/disk')"
+      >磁盘</el-link>
+      <el-link
+        class="right-item"
+        icon="el-icon-message-solid"
+        :underline="false"
+        @click="$router.push('/chat')"
+      >消息</el-link>
+      <el-link
+        class="right-item"
+        icon="el-icon-s-management"
+        :underline="false"
         @click="$router.push('/manage')"
       >管理</el-link>
       <el-link

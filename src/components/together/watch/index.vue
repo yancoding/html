@@ -1,11 +1,11 @@
 <template>
   <div>
-    <VideoPlayer
+    <!-- <VideoPlayer
       ref="player"
       :options="videoOptions"
       :player-class="playerClass"
       @ready="handlePlayerReady"
-    ></VideoPlayer>
+    ></VideoPlayer> -->
     <OnlineUserList
       @invite="handleInvite"
     />
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import VideoPlayer from './VideoPlayer'
+// import VideoPlayer from './VideoPlayer'
 import VideoList from './VideoList'
 import OnlineUserList from './OnlineUserList'
 
@@ -24,7 +24,7 @@ import { mapState } from 'vuex'
 
 export default {
   components: {
-    VideoPlayer,
+    // VideoPlayer,
     VideoList,
     OnlineUserList,
   },

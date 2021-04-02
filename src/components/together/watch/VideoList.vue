@@ -1,6 +1,6 @@
 <template>
   <div class="video-list">
-    <VideoListCard
+    <VideoCard
       v-for="video in videoList"
       :key="video.id"
       :video="video"
@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import VideoListCard from './VideoListCard'
+import VideoCard from './VideoCard'
 export default {
   components: {
-    VideoListCard,
+    VideoCard,
   },
   data() {
     return {
@@ -22,9 +22,9 @@ export default {
   },
   methods: {
     getVideoList() {
-      this.$http.post('')
-        .then(data => {
-          this.videoList = data.data
+      this.$http.get('file')
+        .then(res => {
+          this.videoList = res.data.content
         })
     },
     handlePlay(video) {
@@ -39,13 +39,13 @@ export default {
 
 <style lang="scss">
 .video-list {
-  width: 840px;
+  width: 1074px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 
-  .video-list-card {
-
+  .video-card {
+    margin-bottom: 10px;
   }
 }
   

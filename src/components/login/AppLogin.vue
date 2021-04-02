@@ -1,81 +1,79 @@
 <template>
-  <el-container class="login-container">
-    <el-header>
+  <div class="login-container">
+    <header>
       <h1>fileCenter</h1>
-    </el-header>
-    <el-main>
-      <el-card>
-        <el-tabs v-model="activePane">
-          <el-tab-pane label="登录" name="login">
-            <el-form
-              ref="loginForm"
-              :model="loginForm"
-              :rules="loginFormRules"
-              @keyup.enter.native="login"
+    </header>
+    <el-card>
+      <el-tabs v-model="activePane">
+        <el-tab-pane label="登录" name="login">
+          <el-form
+            ref="loginForm"
+            :model="loginForm"
+            :rules="loginFormRules"
+            @keyup.enter.native="login"
+          >
+            <el-form-item
+              label="用户名"
+              prop="username"
             >
-              <el-form-item
-                label="用户名"
-                prop="username"
-              >
-                <el-input
-                  placeholder="请输入用户名"
-                  v-model.trim="loginForm.username"
-                  @change="getSalt"></el-input>
-              </el-form-item>
-              <el-form-item
-                label="密码"
-                prop="password"
-              >
-                <el-input
-                  placeholder="请输入密码"
-                  v-model.trim="loginForm.password"
-                  show-password></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button
-                  class="button-confirm"
-                  type="primary"
-                  @click="login"
-                >登录</el-button>
-              </el-form-item>
-            </el-form>
-          </el-tab-pane>
-          <el-tab-pane label="注册" name="register">
-            <el-form
-              ref="registerForm"
-              :model="registerForm"
-              :rules="registerFormRules"
-              @keyup.enter.native="register"
+              <el-input
+                placeholder="请输入用户名"
+                v-model.trim="loginForm.username"
+                @change="getSalt"></el-input>
+            </el-form-item>
+            <el-form-item
+              label="密码"
+              prop="password"
             >
-              <el-form-item
-                label="用户名"
-                prop="username"
-              >
-                <el-input
-                  placeholder="请输入用户名"
-                  v-model.trim="registerForm.username"></el-input>
+              <el-input
+                placeholder="请输入密码"
+                v-model.trim="loginForm.password"
+                show-password></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                class="button-confirm"
+                type="primary"
+                @click="login"
+              >登录</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="注册" name="register">
+          <el-form
+            ref="registerForm"
+            :model="registerForm"
+            :rules="registerFormRules"
+            @keyup.enter.native="register"
+          >
+            <el-form-item
+              label="用户名"
+              prop="username"
+            >
+              <el-input
+                placeholder="请输入用户名"
+                v-model.trim="registerForm.username"></el-input>
+            </el-form-item>
+            <el-form-item
+              label="密码"
+              prop="password"
+            >
+              <el-input
+                placeholder="请输入密码"
+                v-model.trim="registerForm.password"
+                show-password></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                class="button-confirm"
+                type="primary"
+                @click="register">注册</el-button>
               </el-form-item>
-              <el-form-item
-                label="密码"
-                prop="password"
-              >
-                <el-input
-                  placeholder="请输入密码"
-                  v-model.trim="registerForm.password"
-                  show-password></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button
-                  class="button-confirm"
-                  type="primary"
-                  @click="register">注册</el-button>
-                </el-form-item>
-            </el-form>
-          </el-tab-pane>
-        </el-tabs>
-      </el-card>
-    </el-main>
-  </el-container>
+          </el-form>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
+  </div>
 </template>
 
 <script>
@@ -232,7 +230,11 @@ export default {
 
 <style lang="scss">
 .login-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  height: 100vh;
+  padding-top: 150px;
   background: url(~@/assets/login-bg.jpg) center/cover no-repeat;
 
   .el-card {

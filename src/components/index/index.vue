@@ -4,9 +4,9 @@
       <AppHeader/>
     </el-header>
     <el-container class="app-body">
-      <el-aside width="150px">
+      <!-- <el-aside width="150px">
         <AppAside/>
-      </el-aside>
+      </el-aside> -->
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -16,13 +16,13 @@
 
 <script>
 import AppHeader from './AppHeader'
-import AppAside from './AppAside'
+// import AppAside from './AppAside'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppAside,
+    // AppAside,
   },
   data() {
     return {
@@ -33,10 +33,10 @@ export default {
 
 <style lang="scss">
 .el-container {
-  height: 100vh;
+  // height: 100vh;
   
   .app-body {
-    width: 1200px;
+    width: 1460px;
     margin: auto;
     overflow: auto;
 

@@ -9,6 +9,7 @@ import togetherWatch from '../components/together/watch'
 import AppLogin from '../components/login/AppLogin'
 import index from '../components/index'
 
+import Home from '../components/home/Home'
 // setting
 import AppSetting from '../components/AppSetting'
 import SettingProfile from '../components/settinng/SettingProfile'
@@ -20,37 +21,22 @@ import UploadPage from '../components/upload/UploadPage'
 // 文件管理
 import Manage from '../components/manage/Manage'
 
+// video
+import Video from '../components/video/Video'
+
 const routes = [
   {
     path: '/login',
     component: AppLogin,
   },
   {
-    path: '/setting',
-    component: AppSetting,
-    children: [
-      {
-        path: 'profile',
-        component: SettingProfile,
-      },
-      {
-        path: 'other',
-        component: SettingOther,
-      },
-    ],
-  },
-  {
-    path: '/upload',
-    component: UploadPage,
-  },
-  {
-    path: '/manage',
-    component: Manage,
-  },
-  {
     path: '/',
     component: index,
     children: [
+      {
+        path: '',
+        component: Home
+      },
       {
         path: '/chat',
         component: chat,
@@ -60,8 +46,34 @@ const routes = [
         component: disk,
       },
       {
+        path: '/upload',
+        component: UploadPage,
+      },
+      {
+        path: '/manage',
+        component: Manage,
+      },
+      {
         path: '/together/watch',
         component: togetherWatch,
+      },
+      {
+        path: '/video/:id',
+        component: Video,
+      },
+      {
+        path: '/setting',
+        component: AppSetting,
+        children: [
+          {
+            path: 'profile',
+            component: SettingProfile,
+          },
+          {
+            path: 'other',
+            component: SettingOther,
+          },
+        ],
       },
     ]
   },

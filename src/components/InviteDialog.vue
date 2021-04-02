@@ -43,9 +43,9 @@ export default {
       'updateCurrentSource',
     ]),
     getVideoList() {
-      this.$http.post('')
-        .then(data => {
-          this.videoList = data.data
+      this.$http.post('file')
+        .then(res => {
+          this.videoList = res.data.content
         })
     },
     invite(id) {

@@ -1,12 +1,9 @@
 <template>
-  <el-container class="upload-page">
-    <el-header class="upload-page-header">
-      <h1>上传视频</h1>
-    </el-header>
-    <el-container class="upload-page-body">
+  <div class="upload-page">
+    <div class="upload-page-body">
       <UploadVideo/>
-    </el-container>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -26,7 +23,7 @@ export default {
 <style lang="scss">
 .upload-page {
   max-width: 1200px;
-  margin: auto;
+  // margin: auto;
   
   .upload-page-header {
     border-bottom: 1px solid gray;

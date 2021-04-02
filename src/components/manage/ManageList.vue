@@ -6,11 +6,20 @@
       v-loading="loading"
       size="small"
       style="width: 100%;"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
       <el-table-column
         prop="name"
         label="文件名"
         :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column
+        prop="classifyName"
+        label="分类"
+        width="120px"></el-table-column>
       <el-table-column
         prop="type"
         label="类型"
@@ -33,9 +42,19 @@
         <div v-else-if="files.length === 0 && !loading">该目录为空</div>
       </div>
     </el-table>
+    <el-pagination
+      background
+      layout="total, prev, pager, next"
+      :total="total"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
+import * as types from '@/store/mutation-types'
+
 export default {
   data() {
     return {
@@ -43,20 +62,41 @@ export default {
       content: [],
       error: false,
       files: [],
+      page: 1,
+      size: 10,
+      total: 0,
+      multipleSelection: [],
     }
   },
   computed: {
   },
   methods: {
+    ...mapMutations('fileManage', [
+      types.UPDATE_MULTIPLE_SELECTION,
+    ]),
+    ...mapMutations({
+
+    }),
     // 获取文件列表
-    getFiles() {
-      this.$http.post('')
-        .then(data => {
-          this.files = data.data
+    getFiles(page) {
+      this.$http.get('file', {
+        params: {
+          page: page,
+          size: this.size,
+        }
+      })
+        .then(res => {
+          if (res.success) {
+            const data = res.data
+            this.files = res.data.content
+            this.page = data.page
+            this.size = data.size
+            this.total = data.total
+          }
         })
     },
     deleteFileById(id) {
-      this.$http.post('/delete', { id })
+      this.$http.get('file', { id })
         .then(data => {
           if (data.success) {
             this.$message({
@@ -73,9 +113,18 @@ export default {
         })
     },
     deitFileById() {},
+    handleCurrentChange(page) {
+      this.getFiles(page)
+    },
+    handleSelectionChange(val) {
+      this[types.UPDATE_MULTIPLE_SELECTION](val)
+    },
   },
   mounted() {
-    this.getFiles()
+    this.getFiles(1)
+  },
+  beforeDestroy() {
+    this[types.UPDATE_MULTIPLE_SELECTION]([])
   },
 }
 </script>
@@ -93,6 +142,10 @@ export default {
           }
         }
       }
+    }
+
+    .el-pagination {
+      text-align: right;
     }
   }
 </style>

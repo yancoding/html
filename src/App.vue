@@ -35,7 +35,11 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
+  font-size: 12px;
 }
 </style>
