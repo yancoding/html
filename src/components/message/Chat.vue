@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
-    <div class="header">{{title}}</div>
+  <div class="chat">
+    <div class="header">{{messageUser.name}}</div>
     <div class="body" ref="body">
-      <div v-for="(message, index) in messages" :key="index">
+      <div v-for="(message, index) in messageList" :key="index">
         <div class="date">{{new Date(message.date) | moment('YYYY/M/D hh:mm:ss')}}</div>
-        <div :class="['message', message.user.id === userId ? 'mine' : '']">
+        <div :class="['message', message.user.id === user.id ? 'mine' : '']">
           <el-image class="avator" fit="cover" :src="message.user.avatar"></el-image>
           <div class="content">{{message.content}}</div>
         </div> 
@@ -20,23 +20,25 @@
 <script>
 import Vue from 'vue'
 export default {
+  props: {
+    messageList: Array,
+    user: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+    messageUser: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       text: '',
     }
-  },
-  props: {
-    messages: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-    userId: [ Number, String ],
   },
   watch: {
     messages() {
@@ -66,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.chat {
   display: flex;
   flex-direction: column;
   border: 1px solid #eaeaea;

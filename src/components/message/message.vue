@@ -1,11 +1,15 @@
 <template>
   <div class="message">
-    <ChatUserList/>
+    <ChatUserList
+      :userList="userList"
+      :messageUser="messageUser"
+    />
     <Chat
-      title="yan"
-      :userId="userInfo.id"
-      :messages="messages"
-      @send="sendContent"></Chat>
+      :user="userInfo"
+      :messageList="messageList"
+      :messageUser="messageUser"
+      @send="sendContent"
+    />
   </div>
 </template>
 <script>
@@ -31,6 +35,13 @@ export default {
       'messages',
       'toMessageUser',
     ]),
+    ...mapState('websocket', [
+      'messageUser',
+      'messageList',
+    ]),
+    ...mapState('websocket', {
+      userList: state => state.userList,
+    }),
   },
   methods: {
     ...mapMutations('chat', [
@@ -59,8 +70,12 @@ export default {
 .message {
   display: flex;
   
-  .container {
+  .chat {
     flex: auto;
+  }
+  
+  .chat-user-list {
+    margin-right: 10px;
   }
 }
 </style>

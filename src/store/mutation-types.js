@@ -15,7 +15,7 @@ export const UPDATE_ERROR_STATUS = '更新错误状态'
 
 // message
 export const PUSH_MESSAGE = 'push消息内容到messages'
-export const SWITCH_TO_MESSAGE_USER = '切换用户'
+export const CHANGE_MESSAGE_USER = '切换用户'
 
 // login
 export const UPDATA_SALT = '更新salt'

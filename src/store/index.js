@@ -22,8 +22,8 @@ const store = new Vuex.Store({
     onlineUsers: [],
     // 邀请dialog
     inviteDialog: {
-      visible: true,
-      content: 'haha',
+      visible: false,
+      content: '',
     },
     currentSource: {},
     inviteInfo: {
