@@ -1,45 +1,30 @@
-const SOCKET_ONOPEN = '✅ Socket connected!'
-const SOCKET_ONCLOSE = '❌ Socket disconnected!'
-const SOCKET_ONERROR = '❌ Socket Error!!!'
-const SOCKET_ONMESSAGE = 'Websocket message received'
-const SOCKET_RECONNECT = 'Websocket reconnected'
-const SOCKET_RECONNECT_ERROR = 'Websocket is having issues reconnecting..'
+// SOCKET 事件
+export const SOCKET_ONCONNECT = '✅socket连接成功'
+export const SOCKET_ONMESSAGE = 'socket收到消息'
+export const SOCKET_ONDISCONNECT = '❌socket连接断开'
+export const SOCKET_ONCONNECTERROR = '❌socket连接错误'
+
+// SOCKET 自定义事件
+export const SOCKET_UPDATE_USERS = '更新在线用户'
 
 // disk
-const UPDATE_CURRENT_PATH = 'update current path!'
-const UPDATE_PATH_CONTENT = 'update path content'
-const UPDATE_LOADING_STATUS = 'update loading status'
-const UPDATE_ERROR_STATUS = 'update error status'
+export const UPDATE_CURRENT_PATH = '更新当前目录'
+export const UPDATE_PATH_CONTENT = '更新目录内容'
+export const UPDATE_LOADING_STATUS = '更新加载状态'
+export const UPDATE_ERROR_STATUS = '更新错误状态'
 
-// chat
-const PUSH_MESSAGE = 'push new message to messages'
+// message
+export const PUSH_MESSAGE = 'push消息内容到messages'
+export const SWITCH_TO_MESSAGE_USER = '切换用户'
 
 // login
-const UPDATA_SALT = 'updata salt value'
-const COMPUTE_ROUNDS = 'compute rounds'
-const  SIGN_OUT = 'sign out'
+export const UPDATA_SALT = '更新salt'
+export const COMPUTE_ROUNDS = '计算rounds'
+export const SIGN_OUT = '登出'
 
 // manage
-const UPDATE_MULTIPLE_SELECTION = '更新选择项'
- 
-export {
-  SOCKET_ONOPEN,
-  SOCKET_ONCLOSE,
-  SOCKET_ONERROR,
-  SOCKET_ONMESSAGE,
-  SOCKET_RECONNECT,
-  SOCKET_RECONNECT_ERROR,
-  // disk
-  UPDATE_CURRENT_PATH,
-  UPDATE_PATH_CONTENT,
-  UPDATE_LOADING_STATUS,
-  UPDATE_ERROR_STATUS,
-  // chat
-  PUSH_MESSAGE,
-  // login
-  UPDATA_SALT,
-  COMPUTE_ROUNDS,
-  SIGN_OUT,
-  // manage
-  UPDATE_MULTIPLE_SELECTION,
-}
+export const UPDATE_MULTIPLE_SELECTION = '更新选择项'
+
+export const UPDATE_USER_INFO = '更新用户个人信息'
+
+export const UPDATE_INVITE_DIALOG = '更新邀请dialog'

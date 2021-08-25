@@ -56,6 +56,9 @@ export default {
             this.options = res.data
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     handleConfirm() {
       if (this.form.classify) {
@@ -71,6 +74,9 @@ export default {
               })
               this.dialogVisible = false
             }
+          })
+          .catch(err => {
+            console.error(err)
           })
       } else {
         this.$message({

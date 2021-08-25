@@ -35,6 +35,9 @@ export default {
         .then(res => {
           this.videoList = res.data.content
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     invite(id) {
       this.$emit('invite', id)

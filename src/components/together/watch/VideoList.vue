@@ -26,6 +26,9 @@ export default {
         .then(res => {
           this.videoList = res.data.content
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     handlePlay(video) {
       this.$emit('play', video)

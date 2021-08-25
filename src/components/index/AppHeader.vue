@@ -24,7 +24,7 @@
         class="right-item"
         icon="el-icon-message-solid"
         :underline="false"
-        @click="$router.push('/chat')"
+        @click="$router.push('/message')"
       >消息</el-link>
       <el-link
         class="right-item"

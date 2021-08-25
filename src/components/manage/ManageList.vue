@@ -94,6 +94,9 @@ export default {
             this.total = data.total
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     deleteFileById(id) {
       this.$http.get('file', { id })
@@ -110,6 +113,9 @@ export default {
               message: '删除失败',
             })
           }
+        })
+        .catch(err => {
+          console.error(err)
         })
     },
     deitFileById() {},

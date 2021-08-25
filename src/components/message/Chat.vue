@@ -36,10 +36,7 @@ export default {
       type: String,
       default: '',
     },
-    userId: {
-      type: Number,
-      required: true,
-    },
+    userId: [ Number, String ],
   },
   watch: {
     messages() {

@@ -1,71 +1,43 @@
 <template>
   <el-dialog
+    class="invite-dialog"
     title="提示"
-    :visible.sync="dialogVisible"
     width="30%"
+    :visible.sync="dialogVisible"
+    :close-on-click-modal="false"
   >
-    <span>{{inviteInfo.video}}</span>
+    <span>{{content}}</span>
     <span slot="footer" class="dialog-footer">
       <el-button @click="dialogVisible = false">取 消</el-button>
-      <el-button type="primary" @click="handleConfirm">确 定</el-button>
+      <el-button type="primary" @click="$emit('comfirm')">确 定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
-
 export default {
+  props: {
+    visible: Boolean,
+    content: String,
+  },
   data() {
     return {
     }
   },
   computed: {
-    ...mapState([
-      'inviteDialog',
-      'inviteInfo',
-      'user',
-    ]),
     dialogVisible: {
       get() {
-        return this.inviteDialog.visible
+        return this.visible
       },
       set(value) {
-        this.updateInviteDialog({
-          visible: value,
-        })
+        this.$emit('update:visible', value)
       },
     },
   },
   methods: {
-    ...mapMutations([
-      'updateInviteDialog',
-      'updateCurrentSource',
-    ]),
-    getVideoList() {
-      this.$http.post('file')
-        .then(res => {
-          this.videoList = res.data.content
-        })
-    },
-    invite(id) {
-      this.$emit('invite', id)
-    },
-    handleConfirm() {
-      this.updateCurrentSource(this.inviteInfo.video)
-      this.dialogVisible = false
-      this.$socket.sendObj({
-        type: 'acceptInvite',
-        roomId: this.inviteInfo.roomId,
-        user: this.user,
-      })
-    },
-  },
-  created() {
   },
 }
 </script>
 
 <style lang="scss">
-  
 </style>

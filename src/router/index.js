@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 Vue.use(VueRouter)
 
-import chat from '../pages/chat'
+import message from '../components/message/message'
 import disk from '../components/disk/index'
 import togetherWatch from '../components/together/watch'
 import AppLogin from '../components/login/AppLogin'
@@ -38,8 +38,8 @@ const routes = [
         component: Home
       },
       {
-        path: '/chat',
-        component: chat,
+        path: '/message',
+        component: message,
       },
       {
         path: '/disk',

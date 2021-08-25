@@ -55,6 +55,9 @@ export default {
             console.log(res.data)
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     getVideoList() {
       this.$http.get('file', {
@@ -65,6 +68,9 @@ export default {
             this.videoList = res.data.content
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     getRankList() {
       this.$http.get('file')
@@ -72,6 +78,9 @@ export default {
           if (res.success) {
             this.rankList = res.data.content
           }
+        })
+        .catch(err => {
+          console.error(err)
         })
     },
     getMovieModule() {
@@ -82,6 +91,9 @@ export default {
             this.movieModule.rankList = res.data.rankList
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     getUsTvModule() {
       this.$http.get('file/ustv')
@@ -91,6 +103,9 @@ export default {
             this.ustvModule.rankList = res.data.rankList
           }
         })
+        .catch(err => {
+          console.error(err)
+        })
     },
     getMvModule() {
       this.$http.get('file/mv')
@@ -99,6 +114,9 @@ export default {
             this.mvModule.videoList = res.data.videoList
             this.mvModule.rankList = res.data.rankList
           }
+        })
+        .catch(err => {
+          console.error(err)
         })
     }
   },
