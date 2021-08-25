@@ -1,17 +1,6 @@
 import * as types from './mutation-types'
 
 const mutations = {
-  [types.SOCKET_ONCONNECT]() {
-  },
-  [types.SOCKET_ONMESSAGE]() {
-  },
-  [types.SOCKET_ONDISCONNECT]() {
-  },
-  [types.SOCKET_ONCONNECTERROR]() {
-  },
-  [types.SOCKET_UPDATE_USERS](state, users) {
-    state.onlineUsers = users
-  },
   updateUser(state, user) {
     state.user = user
   },

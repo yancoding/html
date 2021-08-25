@@ -8,6 +8,8 @@ Vue.prototype.$socket = socket
 
 import actions from './actions'
 import mutations from './mutations'
+
+import websocket from './modules/websocket'
 import disk from './modules/disk'
 import chat from './modules/chat'
 import user from './modules/user'
@@ -33,13 +35,19 @@ const store = new Vuex.Store({
   mutations,
   // 模块
   modules: {
+    websocket,
     disk,
     chat,
     fileManage,
     user,
   },
   // 插件
-  plugins: [ createSocketPlugin(socket) ],
+  plugins: [
+    createSocketPlugin({
+      socket,
+      namespaces: 'websocket/',
+    }),
+  ],
 })
 
 export default store
