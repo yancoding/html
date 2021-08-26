@@ -1,24 +1,31 @@
-# html
+# 项目说明
 
-## Project setup
-```
+## 安装依赖
+
+``` js
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+## 启动dev本地服务
+
+``` js
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+## 打包prd
+
+``` js
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
+## 部署
+
+``` js
+npm run deploy
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Lints and fixes files
+
+``` js
+npm run lint
+```
