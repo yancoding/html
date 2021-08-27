@@ -69,22 +69,6 @@ export default {
       .catch(err => {
         console.error(err)
       })
-
-    this.$socket.on("connect", () => {
-      console.log(this.$socket.id); // x8WIv7-mJelg7on_ALbx
-
-      this.$socket.emit('chat', '我们来聊天吧', res => {
-        console.log({ res })
-      })
-    });
-
-    this.$socket.on('message', data => {
-      console.log(data)
-    })
-
-    this.$socket.on("disconnect", () => {
-      console.log(this.$socket.id); // undefined
-    });
   },
 }
 </script>

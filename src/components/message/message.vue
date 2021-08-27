@@ -16,7 +16,7 @@
 import Chat from './Chat'
 import ChatUserList from './ChatUserList'
 
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import * as types from '@/store/mutation-types'
 
 export default {
@@ -44,21 +44,14 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations('chat', [
-      types.PUSH_MESSAGE,
+    ...mapMutations('websocket', [
+      types.SEND_MESSAGE,
+    ]),
+    ...mapActions('websocket', [
+      'sendMessage',
     ]),
     sendContent(content) {
-      // this.$socket.send(content)
-      this.$socket.emit('chat', this.toMessageUser.id, content, res => {
-        if (res.success) {
-          console.log('发送成功')
-        }
-      })
-      this[types.PUSH_MESSAGE]({
-        date: Date.now(),
-        content,
-        user: this.userInfo,
-      })
+      this.sendMessage({ content })
     },
   },
 }

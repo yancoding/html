@@ -14,7 +14,7 @@ export const UPDATE_LOADING_STATUS = '更新加载状态'
 export const UPDATE_ERROR_STATUS = '更新错误状态'
 
 // message
-export const PUSH_MESSAGE = 'push消息内容到messages'
+export const PUSH_MESSAGE = 'push消息内容到messageList'
 export const CHANGE_MESSAGE_USER = '切换用户'
 
 // login

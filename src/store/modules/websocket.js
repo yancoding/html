@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import socket from '../../socket'
 
 export default {
   namespaced: true,
@@ -31,7 +32,23 @@ export default {
     [types.CHANGE_MESSAGE_USER](state, { user }) {
       state.messageUser = user
     },
+    // push消息内容到messageList
+    [types.PUSH_MESSAGE](state, { message }) {
+      state.messageList.push(message)
+    },
   },
   actions: {
+    sendMessage({ commit, state }, { content }) {
+      const userId = state.messageUser.id
+      socket.emit('chat', userId, content, res => {
+        if (res.success) {
+          commit(types.PUSH_MESSAGE, {
+            message: res.data,
+          })
+        } else {
+          console.log('发送失败')
+        }
+      })
+    },
   },
 }
