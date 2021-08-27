@@ -19,10 +19,6 @@ export default {
     [types.PUSH_MESSAGE](state, message) {
       state.messages.push(message)
     },
-    // 切换聊天对象
-    [types.SWITCH_TO_MESSAGE_USER](state, user) {
-      state.toMessageUser = user
-    }
   },
   actions: {
   },

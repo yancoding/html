@@ -16,8 +16,7 @@
 import Chat from './Chat'
 import ChatUserList from './ChatUserList'
 
-import { mapState, mapMutations, mapActions } from 'vuex'
-import * as types from '@/store/mutation-types'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -44,9 +43,6 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations('websocket', [
-      types.SEND_MESSAGE,
-    ]),
     ...mapActions('websocket', [
       'sendMessage',
     ]),

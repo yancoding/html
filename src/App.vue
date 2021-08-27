@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import * as types from '@/store/mutation-types'
 import InviteDialog from './components/InviteDialog'
 
@@ -44,10 +44,9 @@ export default {
     ...mapMutations([
       types.UPDATE_INVITE_DIALOG,
       'updateCurrentSource',
-      'updateUser',
     ]),
-    ...mapMutations('user', [
-      types.UPDATE_USER_INFO,
+    ...mapActions([
+      'getUserInfo',
     ]),
     handleInviteDialogConfirm() {
       this.updateCurrentSource(this.inviteInfo.video)
@@ -60,15 +59,8 @@ export default {
     },
   },
   created() {
-    this.$http.get('/user')
-      .then(res => {
-        if (res.success) {
-          this[types.UPDATE_USER_INFO](res.data)
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    // 获取用户信息
+    this.getUserInfo()
   },
 }
 </script>

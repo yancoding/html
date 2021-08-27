@@ -1,8 +1,9 @@
 import * as types from './mutation-types'
 
 const mutations = {
-  updateUser(state, user) {
-    state.user = user
+  // 更新用户信息
+  [types.UPDATE_USER_INFO](state, info) {
+    state.userInfo = info
   },
   [types.UPDATE_INVITE_DIALOG](state, { visible, content }) {
     state.inviteDialog = { ...state.inviteDialog, visible, content }
